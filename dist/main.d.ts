@@ -1,4 +1,4 @@
-import { Credentials, Department } from "./types/interface.js";
+import { Credentials, Department, Faculty, ProgramHead } from "./types/interface.js";
 export default class APIClient {
     private BASE_URL;
     constructor(url: string);
@@ -32,17 +32,38 @@ export default class APIClient {
          * */
         read: (id?: number) => Promise<Record<string, unknown>>;
     };
-    ProgramOutcomes(): {
-        create: (token: string, poDesc: string, progID: number, seqnum: number) => Promise<Record<string, unknown>>;
-        read: (token: string, code: string) => Promise<Record<string, unknown>>;
-        delete: (token: string, progID: number) => Promise<Record<string, unknown>>;
+    ProgramHead(): {
+        /**
+         *
+         * @param programHead
+         * @returns
+         */
+        create: (programHead: ProgramHead) => Promise<Record<string, unknown>>;
+        /**
+         *
+         * @param id
+         * @returns
+         */
+        read: (id?: number) => Promise<Record<string, unknown>>;
     };
-    PerformanceIndicator(): {
-        create: (token: string, piDesc: string, poID: number, courseID: number, tool: string, level: string) => Promise<Record<string, unknown>>;
-        read: (token: string, poID?: number) => Promise<Record<string, unknown>>;
-    };
-    Curriculum(): {
-        create: (token: string, code: string, rev_num: number, effectivity: string, cmo_ref: string) => Promise<Record<string, unknown>>;
-        read: (token: string) => Promise<Record<string, unknown>>;
+    Faculty(): {
+        /**
+         *
+         * @param faculty
+         * @returns
+         */
+        create: (faculty: Faculty) => Promise<Record<string, unknown>>;
+        /**
+         *
+         * @param dept_id
+         * @returns
+         */
+        read: (dept_id?: number) => Promise<Record<string, unknown>>;
+        /**
+         * Return a faculty or a list of faculty who are not Program Head
+         * @param id
+         * @returns
+         */
+        readNonPH: (id?: number) => Promise<Record<string, unknown>>;
     };
 }

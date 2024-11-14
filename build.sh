@@ -8,6 +8,9 @@ rm main.d.ts
 rm -rf types
 rm -rf api
 
-cd ..
-cd build
+cd ../build
 
+mv bundle.js ../dist
+mv main.d.ts ../dist
+mv types ../dist
+mv api ../dist
