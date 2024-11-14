@@ -1,0 +1,17 @@
+{
+  "name": "probeclient",
+  "version": "1.1.11",
+  "description": "",
+  "main": "./bundle.js",
+  "types": "./main.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "probeclient": "file:"
+  }
+}
