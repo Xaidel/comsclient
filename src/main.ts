@@ -1,8 +1,21 @@
 import { login, logout, validate } from "./api/Auth.js";
+import { getCourse, postCourse } from "./api/Course.js";
+import { getCurriculum, postCurriculum } from "./api/Curriculum.js";
 import { getDepartment, postDepartment } from "./api/Department.js";
-import { getFaculty, getNonProgramHeadFaculties, postFaculty } from "./api/Faculty.js";
+import {
+  getFaculty,
+  getNonProgramHeadFaculties,
+  postFaculty,
+} from "./api/Faculty.js";
 import { getProgramhead, postProgramHead } from "./api/ProgramHead.js";
-import { Credentials, Department, Faculty, ProgramHead } from "./types/interface.js";
+import {
+  Course,
+  Credentials,
+  Curriculum,
+  Department,
+  Faculty,
+  ProgramHead,
+} from "./types/interface.js";
 
 export default class APIClient {
   private BASE_URL: string;
@@ -66,59 +79,85 @@ export default class APIClient {
     };
   }
 
-  ProgramHead(){
+  ProgramHead() {
     return {
       /**
-       * 
-       * @param programHead 
-       * @returns 
+       *
+       * @param programHead
+       * @returns
        */
-      create: async (programHead: ProgramHead): Promise<Record<string, unknown>> => {
-        const res = await postProgramHead(this.BASE_URL, programHead)
+      create: async (
+        programHead: ProgramHead,
+      ): Promise<Record<string, unknown>> => {
+        const res = await postProgramHead(this.BASE_URL, programHead);
         return res;
       },
       /**
-       * 
-       * @param id 
-       * @returns 
+       *
+       * @param id
+       * @returns
        */
-      read: async(id?: number): Promise<Record<string, unknown>> => {
-        const res = await getProgramhead(this.BASE_URL, id)
+      read: async (id?: number): Promise<Record<string, unknown>> => {
+        const res = await getProgramhead(this.BASE_URL, id);
         return res;
-      }
-    }
+      },
+    };
   }
 
-  Faculty(){
+  Faculty() {
     return {
       /**
-       * 
-       * @param faculty 
-       * @returns 
+       *
+       * @param faculty
+       * @returns
        */
       create: async (faculty: Faculty): Promise<Record<string, unknown>> => {
-        const res = await postFaculty(this.BASE_URL, faculty)
-        return res
+        const res = await postFaculty(this.BASE_URL, faculty);
+        return res;
       },
       /**
-       * 
-       * @param dept_id 
-       * @returns 
+       *
+       * @param dept_id
+       * @returns
        */
       read: async (dept_id?: number): Promise<Record<string, unknown>> => {
-        const res = await getFaculty(this.BASE_URL, dept_id)
-        return res
+        const res = await getFaculty(this.BASE_URL, dept_id);
+        return res;
       },
       /**
        * Return a faculty or a list of faculty who are not Program Head
-       * @param id 
-       * @returns 
+       * @param id
+       * @returns
        */
       readNonPH: async (id?: number): Promise<Record<string, unknown>> => {
-        const res = await getNonProgramHeadFaculties(this.BASE_URL, id)
-        return res
-      }
-    }
+        const res = await getNonProgramHeadFaculties(this.BASE_URL, id);
+        return res;
+      },
+    };
   }
-  
+  Curriculum() {
+    return {
+      create: async (curr: Curriculum): Promise<Record<string, unknown>> => {
+        const res = await postCurriculum(this.BASE_URL, curr);
+        return res;
+      },
+      read: async (currID?: number): Promise<Record<string, unknown>> => {
+        const res = await getCurriculum(this.BASE_URL, currID);
+        return res;
+      },
+    };
+  }
+
+  Course() {
+    return {
+      create: async (course: Course): Promise<Record<string, unknown>> => {
+        const res = await postCourse(this.BASE_URL, course);
+        return res;
+      },
+      read: async (courseID?: number): Promise<Record<string, unknown>> => {
+        const res = await getCourse(this.BASE_URL, courseID);
+        return res;
+      },
+    };
+  }
 }

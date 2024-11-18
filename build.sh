@@ -12,5 +12,11 @@ cd ../build
 
 mv bundle.js ../dist
 mv main.d.ts ../dist
-mv types ../dist
-mv api ../dist
+
+cd ../dist
+mkdir types
+mkdir api
+
+cd ../build
+mv types/interface.d.ts ../dist/types
+mv api/*.d.ts ../dist/api

@@ -1,4 +1,4 @@
-import { Credentials, Department, Faculty, ProgramHead } from "./types/interface.js";
+import { Course, Credentials, Curriculum, Department, Faculty, ProgramHead } from "./types/interface.js";
 export default class APIClient {
     private BASE_URL;
     constructor(url: string);
@@ -65,5 +65,13 @@ export default class APIClient {
          * @returns
          */
         readNonPH: (id?: number) => Promise<Record<string, unknown>>;
+    };
+    Curriculum(): {
+        create: (curr: Curriculum) => Promise<Record<string, unknown>>;
+        read: (currID?: number) => Promise<Record<string, unknown>>;
+    };
+    Course(): {
+        create: (course: Course) => Promise<Record<string, unknown>>;
+        read: (courseID?: number) => Promise<Record<string, unknown>>;
     };
 }
