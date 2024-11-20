@@ -58,7 +58,8 @@ export default class APIClient {
          * @param dept_id
          * @returns
          */
-        read: (dept_id?: number) => Promise<Record<string, unknown>>;
+        read: (id: number) => Promise<Record<string, unknown>>;
+        readFacultyByDept: (dept_ID: number) => Promise<Record<string, unknown>>;
         /**
          * Return a faculty or a list of faculty who are not Program Head
          * @param id
@@ -68,7 +69,8 @@ export default class APIClient {
     };
     Curriculum(): {
         create: (curr: Curriculum) => Promise<Record<string, unknown>>;
-        read: (currID?: number) => Promise<Record<string, unknown>>;
+        read: (currID?: string) => Promise<Record<string, unknown>>;
+        readByProgram: (programID: number) => Promise<Record<string, unknown>>;
     };
     Course(): {
         create: (course: Course) => Promise<Record<string, unknown>>;

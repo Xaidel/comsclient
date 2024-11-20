@@ -2,13 +2,29 @@ import { Curriculum } from "../types/interface";
 
 export async function getCurriculum(
   url: string,
-  currID?: number,
+  currID?: string,
 ): Promise<Record<string, unknown>> {
   const realUrl =
     currID === undefined
       ? `${url}/curriculums`
       : `${url}/curriculums/${currID}`;
   const res = await fetch(realUrl, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+    },
+  });
+  if (!res.ok) {
+    throw new Error(`${res.status} ${res.statusText}`);
+  }
+  return res.json() as Promise<Record<string, unknown>>;
+}
+
+export async function getCurriculumByProgram(
+  url: string,
+  programID: number,
+): Promise<Record<string, unknown>> {
+  const res = await fetch(`${url}/curriculums/programs/${programID}`, {
     method: "GET",
     headers: {
       Accept: "application/json",

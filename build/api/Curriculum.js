@@ -13,6 +13,18 @@ export async function getCurriculum(url, currID) {
     }
     return res.json();
 }
+export async function getCurriculumByProgram(url, programID) {
+    const res = await fetch(`${url}/curriculums/programs/${programID}`, {
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+        },
+    });
+    if (!res.ok) {
+        throw new Error(`${res.status} ${res.statusText}`);
+    }
+    return res.json();
+}
 export async function postCurriculum(url, curr) {
     const res = await fetch(`${url}/curriculums`, {
         method: "POST",

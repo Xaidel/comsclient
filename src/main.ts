@@ -1,9 +1,14 @@
 import { login, logout, validate } from "./api/Auth.js";
 import { getCourse, postCourse } from "./api/Course.js";
-import { getCurriculum, postCurriculum } from "./api/Curriculum.js";
+import {
+  getCurriculum,
+  getCurriculumByProgram,
+  postCurriculum,
+} from "./api/Curriculum.js";
 import { getDepartment, postDepartment } from "./api/Department.js";
 import {
   getFaculty,
+  getFacultyFromDepartment,
   getNonProgramHeadFaculties,
   postFaculty,
 } from "./api/Faculty.js";
@@ -120,8 +125,14 @@ export default class APIClient {
        * @param dept_id
        * @returns
        */
-      read: async (dept_id?: number): Promise<Record<string, unknown>> => {
-        const res = await getFaculty(this.BASE_URL, dept_id);
+      read: async (id: number): Promise<Record<string, unknown>> => {
+        const res = await getFaculty(this.BASE_URL, id);
+        return res;
+      },
+      readFacultyByDept: async (
+        dept_ID: number,
+      ): Promise<Record<string, unknown>> => {
+        const res = await getFacultyFromDepartment(this.BASE_URL, dept_ID);
         return res;
       },
       /**
@@ -141,8 +152,14 @@ export default class APIClient {
         const res = await postCurriculum(this.BASE_URL, curr);
         return res;
       },
-      read: async (currID?: number): Promise<Record<string, unknown>> => {
+      read: async (currID?: string): Promise<Record<string, unknown>> => {
         const res = await getCurriculum(this.BASE_URL, currID);
+        return res;
+      },
+      readByProgram: async (
+        programID: number,
+      ): Promise<Record<string, unknown>> => {
+        const res = await getCurriculumByProgram(this.BASE_URL, programID);
         return res;
       },
     };

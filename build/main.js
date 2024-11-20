@@ -1,8 +1,8 @@
 import { login, logout, validate } from "./api/Auth.js";
 import { getCourse, postCourse } from "./api/Course.js";
-import { getCurriculum, postCurriculum } from "./api/Curriculum.js";
+import { getCurriculum, getCurriculumByProgram, postCurriculum, } from "./api/Curriculum.js";
 import { getDepartment, postDepartment } from "./api/Department.js";
-import { getFaculty, getNonProgramHeadFaculties, postFaculty, } from "./api/Faculty.js";
+import { getFaculty, getFacultyFromDepartment, getNonProgramHeadFaculties, postFaculty, } from "./api/Faculty.js";
 import { getProgramhead, postProgramHead } from "./api/ProgramHead.js";
 export default class APIClient {
     BASE_URL;
@@ -94,8 +94,12 @@ export default class APIClient {
              * @param dept_id
              * @returns
              */
-            read: async (dept_id) => {
-                const res = await getFaculty(this.BASE_URL, dept_id);
+            read: async (id) => {
+                const res = await getFaculty(this.BASE_URL, id);
+                return res;
+            },
+            readFacultyByDept: async (dept_ID) => {
+                const res = await getFacultyFromDepartment(this.BASE_URL, dept_ID);
                 return res;
             },
             /**
@@ -117,6 +121,10 @@ export default class APIClient {
             },
             read: async (currID) => {
                 const res = await getCurriculum(this.BASE_URL, currID);
+                return res;
+            },
+            readByProgram: async (programID) => {
+                const res = await getCurriculumByProgram(this.BASE_URL, programID);
                 return res;
             },
         };
