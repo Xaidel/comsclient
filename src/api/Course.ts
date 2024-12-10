@@ -44,6 +44,20 @@ export async function postCourse(
   return res.json() as Promise<Record<string, unknown>>;
 }
 
+export async function batchProcessCourse(url: string, file: File): Promise<Record<string, unknown>> {
+  const res = await fetch(`${url}/courses`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "multipart/form-data"
+    },
+    body: file
+  })
+  if (!res.ok) {
+    throw new Error(`${res.status} ${res.statusText}`)
+  }
+  return res.json() as Promise<Record<string, unknown>>
+}
+
 export async function deleteCourse(
   url: string,
   id: number,

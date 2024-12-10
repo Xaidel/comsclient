@@ -1,5 +1,5 @@
 import { login, logout, validate } from "./api/Auth.js";
-import { getCourse, postCourse } from "./api/Course.js";
+import { batchProcessCourse, getCourse, postCourse } from "./api/Course.js";
 import {
   getCurriculum,
   getCurriculumByProgram,
@@ -176,6 +176,10 @@ export default class APIClient {
         const res = await getCourse(this.BASE_URL, courseID);
         return res;
       },
+      batchProcess: async (file: File): Promise<Record<string, unknown>> => {
+        const res = await batchProcessCourse(this.BASE_URL, file)
+        return res
+      }
     };
   }
 
