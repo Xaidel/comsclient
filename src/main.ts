@@ -188,8 +188,8 @@ export default class APIClient {
       current: async (): Promise<Record<string, unknown>> => {
         const res = await getCurrentPeriod(this.BASE_URL)
         return res
-      }
-    }
+      },
+    };
   }
 
 }

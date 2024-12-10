@@ -76,4 +76,8 @@ export default class APIClient {
         create: (course: Course) => Promise<Record<string, unknown>>;
         read: (courseID?: number) => Promise<Record<string, unknown>>;
     };
+    Period(): {
+        read: (periodID: number) => Promise<Record<string, unknown>>;
+        current: () => Promise<Record<string, unknown>>;
+    };
 }
