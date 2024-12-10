@@ -12,6 +12,7 @@ import {
   getNonProgramHeadFaculties,
   postFaculty,
 } from "./api/Faculty.js";
+import { getCurrentPeriod, getPeriod } from "./api/Period.js";
 import { getProgramhead, postProgramHead } from "./api/ProgramHead.js";
 import {
   Course,
@@ -177,4 +178,18 @@ export default class APIClient {
       },
     };
   }
+
+  Period() {
+    return {
+      read: async (periodID: number): Promise<Record<string, unknown>> => {
+        const res = await getPeriod(this.BASE_URL, periodID)
+        return res
+      },
+      current: async (): Promise<Record<string, unknown>> => {
+        const res = await getCurrentPeriod(this.BASE_URL)
+        return res
+      }
+    }
+  }
+
 }

@@ -3,6 +3,7 @@ import { getCourse, postCourse } from "./api/Course.js";
 import { getCurriculum, getCurriculumByProgram, postCurriculum, } from "./api/Curriculum.js";
 import { getDepartment, postDepartment } from "./api/Department.js";
 import { getFaculty, getFacultyFromDepartment, getNonProgramHeadFaculties, postFaculty, } from "./api/Faculty.js";
+import { getCurrentPeriod, getPeriod } from "./api/Period.js";
 import { getProgramhead, postProgramHead } from "./api/ProgramHead.js";
 export default class APIClient {
     BASE_URL;
@@ -139,6 +140,18 @@ export default class APIClient {
                 const res = await getCourse(this.BASE_URL, courseID);
                 return res;
             },
+        };
+    }
+    Period() {
+        return {
+            read: async (periodID) => {
+                const res = await getPeriod(this.BASE_URL, periodID);
+                return res;
+            },
+            current: async () => {
+                const res = await getCurrentPeriod(this.BASE_URL);
+                return res;
+            }
         };
     }
 }
